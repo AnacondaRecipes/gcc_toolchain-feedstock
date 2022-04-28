@@ -1,0 +1,31 @@
+cpu_arch:
+  - x86_64
+gcc_version:
+  - 11.2.0
+libgfortran_soname:
+  - 5
+gcc_version_build_number:
+  - 0
+_libgcc_mutex:
+  - 0.1 main
+# duma_version:
+#   - 2.5.15
+gnu:
+  - 2.17
+conda_glibc_ver:
+  - 2.17
+kernel_version:
+  - 3.10.0
+# gdb_version:
+#   - 11.2
+openmp_ver:
+  - 5.1
+libgomp_ver:
+  - 1.0.0
+
+zip_keys:
+  - - kernel_version
+    - conda_glibc_ver
+    - cpu_arch
+  - - gcc_version
+    - libgfortran_soname
