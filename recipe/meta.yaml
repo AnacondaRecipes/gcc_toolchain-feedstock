@@ -32,7 +32,7 @@ requirements:
     # - {{ compiler('cxx') }}
     - llvm-tools  # [osx]
     - make
-    - bash
+    - bash        # [not s390x]
     - autoconf 
     - automake
     - libtool

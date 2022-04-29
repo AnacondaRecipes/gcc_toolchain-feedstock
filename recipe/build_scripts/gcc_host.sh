@@ -65,7 +65,7 @@ pushd "${WDIR}/build/gcc-final"
     echo "Installing final gcc compiler ..."
     make install-strip
 
-    main install-target-libobjc
+    make install-target-libobjc
 
     pushd "${WDIR}/gcc_built"
         find . -type f -name "*.la" -exec rm {} \;
