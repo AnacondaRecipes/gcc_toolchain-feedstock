@@ -3,7 +3,8 @@ c_compiler_version:
 cxx_compiler_version:
   - 7.5.0
 cpu_arch:
-  - x86_64
+  - x86_64  # [linux and x86_64]
+  - s390x   # [linux and s390x]
 gcc_version:
   - 11.2.0
 libgfortran_soname:

@@ -32,12 +32,14 @@ case "${target_platform}" in
   *linux-64*|*osx-64*) CFG_ARCH="x86";;
   *aarch64*|*arm64*) CFG_ARCH="arm";;
   *ppc64le*) CFG_ARCH="powerpc";;
-  *s390x*) CFG_ARCH="s390x";;
+  *s390x*) CFG_ARCH="s390";;
   *)
       echo "unsupported target architecture ${target_platform}"
       exit 1
       ;;
 esac
+
+export CFG_ARCH
 
 ${RECIPE_DIR}/build_scripts/build.sh
 
