@@ -60,7 +60,7 @@ for f in binutils duma gcc gdb glibc "glibc-ports" gmp libelf ltrace; do
 done
 
 case "${HOST}" in
-    *-linux-gnu*)
+    *-linux*)
         # we don't need them on linux architectures ... part of glibc
         rm -rf ${WDIR}/gettext ${WDIR}/libiconv
         ;;

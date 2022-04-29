@@ -5,7 +5,7 @@ set -e
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
 case "${HOST}" in
-    *-linux-gnu*)
+    *-linux*)
         exit 0
         ;;
 esac
