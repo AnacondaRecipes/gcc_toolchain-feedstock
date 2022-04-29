@@ -4,9 +4,9 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
-rm -rf "${WDIR}/build/duma"
-mkdir -p "${WDIR}/build/duma"
-pushd "${WDIR}/build/duma"
+rm -rf "${WDIR}/build/duma-target"
+mkdir -p "${WDIR}/build/duma-target"
+pushd "${WDIR}/build/duma-target"
     cp -r "${WDIR}"/duma/* .
 
     echo "Building duma ..."

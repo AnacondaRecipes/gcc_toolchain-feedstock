@@ -4,9 +4,9 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
-rm -rf "${WDIR}/build/strace"
-mkdir -p "${WDIR}/build/strace"
-pushd "${WDIR}/build/strace"
+rm -rf "${WDIR}/build/strace-target"
+mkdir -p "${WDIR}/build/strace-target"
+pushd "${WDIR}/build/strace-target"
 
     CC="${CFG_TARGET}-gcc"                            \
     CFLAGS="${ARCH_CFLAG}"                           \
