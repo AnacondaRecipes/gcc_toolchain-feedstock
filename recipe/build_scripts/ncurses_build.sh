@@ -29,7 +29,7 @@ pushd "${WDIR}/build/ncurses-build"
     make
 
     echo "Installing ncurses ..."
-    STRIP="${host}-strip" make "install.progs"
+    STRIP="${HOST}-strip" make "install.progs"
 
 popd
 

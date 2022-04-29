@@ -24,7 +24,7 @@ pushd "${WDIR}/build/ncurses-target"
     make
 
     echo "Installing ncurses ..."
-    STRIP="${host}-strip" make install
+    STRIP="${CFG_TARGET}-strip" make install
 
 popd
 
