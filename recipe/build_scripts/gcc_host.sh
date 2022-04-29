@@ -88,35 +88,30 @@ pushd "${WDIR}/build/gcc-final"
         ln -sfv "../../libexec/gcc/${CFG_TARGET}/${gcc_version}/liblto_plugin.so" "${WDIR}/gcc_built/lib/bfd-plugins/liblto_plugin.so"
     fi
 
-    popd
-
-    rm -rf "${WDIR}/build/gcc-final-movelibs"
-    mkdir "${WDIR}/build/gcc-final-movelibs"
-    pushd "${WDIR}/build/gcc-final-movelibs"
-
-    multi_root=$( "${CFG_TARGET}-gcc" -print-sysroot )
-
-    canon_root=$( cd "${multi_root}" && pwd -P )
-    canon_prefix=$( cd "${WDIR}/gcc_built" && pwd -P )
-
-    gcc_dir="${WDIR}/gcc_built/${CFG_TARGET}/lib"
-    if [ ! -d "${gcc_dir}" ]; then
-        return
-    fi
-    dst_dir="${canon_root}/lib"
-    rel=$( echo "${gcc_dir#${WDIR}/gcc_built/}" | sed 's#[^/]\{1,\}#..#g' )
-
-    ls "${gcc_dir}" | while read f; do
-        case "${f}" in
-            *.ld)
-                continue
-                ;;
-        esac
-        if [ -f "${gcc_dir}/${f}" ]; then
-            mkdir -p "${dst_dir}"
-            mv "${gcc_dir}/${f}" "${dst_dir}/${f}"
-            ln -sf "${rel}/${dst_dir#${canon_prefix}/}/${f}" "${gcc_dir}/${f}"
-        fi
-    done
-
 popd
+
+multi_root=$( "${CFG_TARGET}-gcc" -print-sysroot )
+
+canon_root=$( cd "${multi_root}" && pwd -P )
+canon_prefix=$( cd "${WDIR}/gcc_built" && pwd -P )
+
+gcc_dir="${WDIR}/gcc_built/${CFG_TARGET}/lib"
+if [ ! -d "${gcc_dir}" ]; then
+    return
+fi
+dst_dir="${canon_root}/lib"
+rel=$( echo "${gcc_dir#${WDIR}/gcc_built/}" | sed 's#[^/]\{1,\}#..#g' )
+
+ls "${gcc_dir}" | while read f; do
+    case "${f}" in
+        *.ld)
+            continue
+            ;;
+    esac
+    if [ -f "${gcc_dir}/${f}" ]; then
+        mkdir -p "${dst_dir}"
+        mv "${gcc_dir}/${f}" "${dst_dir}/${f}"
+        ln -sf "${rel}/${dst_dir#${canon_prefix}/}/${f}" "${gcc_dir}/${f}"
+        fi
+done
+
