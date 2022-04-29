@@ -12,16 +12,22 @@ gcc_version_build_number:
   - 0
 _libgcc_mutex:
   - 0.1 main
-# duma_version:
-#   - 2.5.15
+duma_version:
+   - 2.5.15
 gnu:
   - 2.17
 conda_glibc_ver:
   - 2.17
 kernel_version:
   - 3.10.0
-# gdb_version:
-#   - 11.2
+gdb_version:
+   - 11.2
+gdb_server_version:
+   - 11.2
+strace_version:
++   - 5.16
+ltrace_version:
+   - 0.7.3
 openmp_ver:
   - 5.1
 libgomp_ver:

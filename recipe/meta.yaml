@@ -435,6 +435,22 @@ outputs:
       license: GPL
   {% endif %}
 
+  {% if gdb_server_version is defined %}
+  - name: gdb_server_{{ target_platform }}
+    target: {{ target_platform }}
+    version: {{ gdb_server_version }}
+    script: install_scripts/install-gdb-server.sh
+    build:
+      number: {{ build_num }}
+      string: {{ build_string }}
+      missing_dso_whitelist:
+        - "*"
+    about:
+      summary: The GNU Project Debugger
+      home: https://www.gnu.org/software/gdb/
+      license: GPL
+  {% endif %}
+
   {% if duma_version is defined %}
   - name: duma_{{ target_platform }}
     target: {{ target_platform }}
