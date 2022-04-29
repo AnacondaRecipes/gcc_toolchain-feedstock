@@ -37,7 +37,7 @@ case "${CFG_ARCH}" in
         ARCH_CFLAG="-mlittle-endian"
         ARCH_LDFLAG="-Wl,-EL"
         ;;
-    s390x*)
+    s390*)
         CFG_TARGET="s390x-conda-linux-gnu"
         ;;
     powerpc*)
