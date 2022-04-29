@@ -1,3 +1,7 @@
+c_compiler_version:
+  - 7.5.0
+cxx_compiler_version:
+  - 7.5.0
 cpu_arch:
   - x86_64
 gcc_version:
