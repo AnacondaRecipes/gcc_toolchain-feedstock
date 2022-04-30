@@ -1,13 +1,16 @@
 #!/bin/bash
 
+# prevent to set variables more then once
+
+if [ -z "${CFG_TARGET}" ]; then
+
+set -e
+
 # we can't use conda's HOST compiler ... see recipe
 # so we pick system-compiler instead
 # if [ -z "${HOST}" ]; then
    HOST=$(gcc -dumpmachine)
 # fi
-
-if [ -z "${CFG_TARGET}" ]; then
-set -e
 
 nuke_dot_in_path() {
     local new
