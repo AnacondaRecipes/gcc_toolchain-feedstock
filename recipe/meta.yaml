@@ -118,7 +118,7 @@ outputs:
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}
         - sysroot_{{ target_platform }} {{ conda_glibc_ver }}
       run:
-        - binutils_impl_linux-64 >=2.38
+        - binutils_impl_{{ target_platform }} >=2.38
         - {{ pin_subpackage("libgcc-devel_" ~ target_platform, exact=True) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
