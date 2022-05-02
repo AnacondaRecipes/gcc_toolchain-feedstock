@@ -46,7 +46,7 @@ case "${CFG_ARCH}" in
     powerpc*)
         CFG_TARGET="powerpc64le-conda-linux-gnu"
         ARCH_CFLAG="-mlittle-endian"
-        ARCH_LDFLAG="-wl,-EL"
+        ARCH_LDFLAG="-Wl,-EL"
         ;;
     x86*)
         CFG_TARGET="x86_64-conda-linux-gnu"
