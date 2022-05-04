@@ -11,7 +11,9 @@ pushd "${WDIR}/build/ltrace-target"
 
     # fixes a quirk in makefile, which uses cpu part of triplet
     # to determine subfolder name ...
-    ln -s sysdeps/linux-gnu/ppc sysdeps/linux-gnu/powerpc64le
+    pushd "sysdeps/linux-gnu"
+    ln -s ppc powerpc64le
+    popd
 
     CONFIG_SHELL="/bin/bash"   \
     LDFLAGS="${TARGET_LDFLAG}" \
