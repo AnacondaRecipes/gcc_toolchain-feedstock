@@ -23,7 +23,7 @@ pushd "${WDIR}/build/gdb-cross"
     LDFLAGS="${HOST_LDFLAG} ${ARCH_LDFLAG}"                                \
     bash "${WDIR}/gdb/configure"                                           \
         --build=${HOST}                                                    \
-        --host=${CFG_HOST}                                                 \
+        --host=${CFG_TARGET}                                               \
         --target=${CFG_TARGET}                                             \
         --prefix=${WDIR}/gcc_built                                         \
         --with-sysroot=${WDIR}/gcc_built/${CFG_TARGET}/sysroot/            \

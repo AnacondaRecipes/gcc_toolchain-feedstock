@@ -4,10 +4,14 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
+GMP_HOST=$HOST
 OSX_CONFIG=
 case "${HOST}" in
     *darwin*)
         OSX_CONFIG="--with-pic"
+        ;;
+    *power*)
+        GMP_HOST="power8-pc-linux-gnu"
         ;;
 esac
 
@@ -20,7 +24,7 @@ pushd "${WDIR}/build/gmp-host"
     LDFLAGS="${HOST_LDFLAG}"                  \
     bash "${WDIR}/gmp/configure"              \
         --build=${HOST}                       \
-        --host=${HOST}                        \
+        --host=${GMP_HOST}                    \
         --prefix="${WDIR}/buildtools"         \
         --enable-fft                          \
         --enable-cxx                          \

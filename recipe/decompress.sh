@@ -6,7 +6,7 @@ set -e
 echo "Fetching sources ..."
 
 rm -rf gcc_toolchain-sources
-git clone -b "gcc-11.2-linux-64" https://github.com/AnacondaRecipes/gcc_toolchain-sources
+git clone -b "gcc-11.2-${target_platform}" https://github.com/AnacondaRecipes/gcc_toolchain-sources
 
 echo "Extracting sources ..."
 
@@ -60,7 +60,7 @@ for f in binutils duma gcc gdb glibc "glibc-ports" gmp libelf ltrace; do
 done
 
 case "${HOST}" in
-    *-linux*)
+    *linux*)
         # we don't need them on linux architectures ... part of glibc
         rm -rf ${WDIR}/gettext ${WDIR}/libiconv
         ;;

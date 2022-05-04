@@ -22,11 +22,17 @@ rm -rf "${WDIR}/build/glibc-core"
 mkdir -p "${WDIR}/build/glibc-core"
 pushd "${WDIR}/build/glibc-core"
 
+    EXTRA_ADDONS="nptl"
     EXTRA_CFLAGS=
     EXTRA_CONFIG=
+    EXTRA_ASFLAG=
     if [ "${CFG_ARCH}" = "x86" ]; then
         EXTRA_CONFIG="--enable-obsolete-rpc"
         EXTRA_CFLAGS="-fcommon -Wno-missing-attributes -Wno-array-bounds -Wno-array-parameter -Wno-stringop-overflow -Wno-maybe-uninitialized"
+    elif [ "${CFG_ARCH}" = "powerpc"]; then
+        EXTRA_CFLAGS="-fcommon -Wno-missing-attributes -Wno-array-bounds -Wno-array-parameter -Wno-stringop-overflow -Wno-maybe-uninitialized"
+        EXTRA_ADDONS="ports,nptl"
+        EXTRA_ASFLAG="-DBROKEN_PPC_8xx_CPU15"
     fi
 
     touch config.cache
@@ -74,7 +80,7 @@ pushd "${WDIR}/build/glibc-core"
         $(get_min_kernel_config)                                                  \
         --with-__thread --with-tls                                                \
         --enable-shared                                                           \
-        --enable-add-ons=nptl                                                     \
+        --enable-add-ons="${EXTRA_ADDONS}"                                        \
         --with-pkgversion="Anaconda glibc"                                        \
         --disable-werror ${EXTRA_CONFIG}
 
@@ -89,6 +95,7 @@ pushd "${WDIR}/build/glibc-core"
 
     echo "Building glibc library ..."
 
+    ASFLAGS="${EXTRA_ASFLAG}"                                                 \
     make default_cflags= CXX= BUILD_CFLAGS="${HOST_CFLAG}"                    \
          BUILD_CPPFLAGS="${OSX_CPP}" BUILD_LDFLAGS="${HOST_LDFLAG} ${OSX_LD}" \
          all
