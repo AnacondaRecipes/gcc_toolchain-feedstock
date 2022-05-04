@@ -29,7 +29,7 @@ pushd "${WDIR}/build/glibc-core"
     if [ "${CFG_ARCH}" = "x86" ]; then
         EXTRA_CONFIG="--enable-obsolete-rpc"
         EXTRA_CFLAGS="-fcommon -Wno-missing-attributes -Wno-array-bounds -Wno-array-parameter -Wno-stringop-overflow -Wno-maybe-uninitialized"
-    elif [ "${CFG_ARCH}" = "powerpc"]; then
+    elif [ "${CFG_ARCH}" = "powerpc" ]; then
         EXTRA_CFLAGS="-fcommon -Wno-missing-attributes -Wno-array-bounds -Wno-array-parameter -Wno-stringop-overflow -Wno-maybe-uninitialized"
         EXTRA_ADDONS="ports,nptl"
         EXTRA_ASFLAG="-DBROKEN_PPC_8xx_CPU15"
