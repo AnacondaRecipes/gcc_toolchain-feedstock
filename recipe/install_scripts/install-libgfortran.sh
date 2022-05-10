@@ -9,7 +9,7 @@ export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/buildtools/bin:${PATH}
 mkdir -p ${PREFIX}/lib/
 rm -f ${PREFIX}/lib/libgfortran* || true
 
-cp -f --no-dereference ${SRC_DIR}/gcc_built/${CHOST}/sysroot/lib/libgfortran*.so* ${PREFIX}/lib/
+cp -f --no-dereference ${SRC_DIR}/build/gcc-final/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
 
 patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libgfortran*.so*
 
