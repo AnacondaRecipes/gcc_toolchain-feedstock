@@ -6,7 +6,7 @@ set -e
 
 echo "Finalizing the toolchain's directories ..."
 
-STRIP_ARG="--strip-all -v"
+STRIP_ARG="--strip-unneeded -v"
 case "$HOST" in
     *darwin*)
        STRIP_ARG=""

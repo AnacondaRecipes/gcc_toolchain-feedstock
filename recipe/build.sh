@@ -2,12 +2,9 @@
 
 set -ex
 
+# debugging ...
 if [ -z "${RECIPE_DIR}" ]; then
     RECIPE_DIR=$PWD
-fi
-
-if [[ "${cpu_arch}" == "aarch64" ]]; then
-    rm -f patches/glibc/p2.17/*-glibc-*.patch
 fi
 
 if [[ ${target_platform} =~ osx-.* ]]; then
