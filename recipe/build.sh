@@ -23,25 +23,11 @@ if [[ $(uname) == Linux ]]; then
   ulimit -s 32768 || true
 fi
 
-export CFG_GLIBC_VER="2.17.0"
-
-case "${target_platform}" in
-  *linux-64*|*osx-64*) CFG_ARCH="x86";;
-  *aarch64*|*arm64*) CFG_ARCH="arm";;
-  *ppc64le*) CFG_ARCH="powerpc";;
-  *s390x*) CFG_ARCH="s390";;
-  *)
-      echo "unsupported target architecture ${target_platform}"
-      exit 1
-      ;;
-esac
-
-export CFG_ARCH
+if [[ "${bootstrapping}" != "yes" ]]; then
+  # Use own compilers instead of relying on ones from the docker image/system
+  conda create -p $SRC_DIR/compilers gcc_${target_platform} gxx_${target_platform} binutils --yes --quiet
+fi
 
 ${RECIPE_DIR}/build_scripts/build.sh
-
-# pushd ./build/gcc-final
-# make -k check || true
-# popd
 
 exit 0

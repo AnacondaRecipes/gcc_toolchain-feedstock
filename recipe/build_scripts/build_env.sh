@@ -6,12 +6,6 @@ if [ -z "${CFG_TARGET}" ]; then
 
 set -e
 
-# we can't use conda's HOST compiler ... see recipe
-# so we pick system-compiler instead
-# if [ -z "${HOST}" ]; then
-   HOST=$(gcc -dumpmachine)
-# fi
-
 nuke_dot_in_path() {
     local new
     local p
@@ -26,10 +20,24 @@ nuke_dot_in_path() {
 
 export WDIR=$PWD
 
-if [ -z "${CFG_ARCH}" ]; then
-    export CFG_ARCH="x86"
-    export CFG_GLIBC_VER="2.17.0"
-fi
+CFG_GLIBC_VER="2.17.0"
+
+case "${target_platform}" in
+  *linux-64*|*osx-64*) CFG_ARCH="x86";;
+  *aarch64*|*arm64*)
+    CFG_ARCH="arm"
+    CFG_GLIBC_VER="2.26.0"
+    ;;
+  *ppc64le*) CFG_ARCH="powerpc";;
+  *s390x*) CFG_ARCH="s390";;
+  *)
+      echo "unsupported target architecture ${target_platform}"
+      exit 1
+      ;;
+esac
+
+export CFG_GLIBC_VER
+export CFG_ARCH
 
 unset ARCH_CFLAG
 unset ARCH_LDFLAG
@@ -53,6 +61,17 @@ case "${CFG_ARCH}" in
         ;;
 esac
 
+if [[ "${bootstrapping}" != "yes" ]]; then
+  export PATH=$WDIR/compilers/bin:$PATH
+  HOST="${CFG_TARGET}"
+fi
+
+# we can't use conda's HOST compiler ...
+# so we pick system-compiler instead
+if [ -z "${HOST}" ]; then
+   HOST=$(gcc -dumpmachine)
+fi
+
 export CFG_TARGET
 export ARCH_CFLAG
 export ARCH_LDFLAG
@@ -67,8 +86,7 @@ unset GREP_OPTIONS
 export CONFIG_SITE=
 
 mkdir -p "${WDIR}/build"
-mkdir -p "${WDIR}/build/tools/bin"
-export PATH="${WDIR}/build/tools/bin:${PATH}"
+mkdir -p "${WDIR}/buildtools/bin"
 
 unset MAKEFLAGS
 export SHELL="/bin/bash"

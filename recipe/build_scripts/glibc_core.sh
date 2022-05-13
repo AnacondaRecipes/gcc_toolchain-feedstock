@@ -35,7 +35,8 @@ pushd "${WDIR}/build/glibc-core"
         EXTRA_ASFLAG="-DBROKEN_PPC_8xx_CPU15"
     elif [ "${CFG_ARCH}" = "arm" ]; then
         EXTRA_CFLAGS="-fcommon -Wno-missing-attributes -Wno-array-bounds -Wno-array-parameter -Wno-stringop-overflow -Wno-maybe-uninitialized"
-        EXTRA_ADDONS="ports,nptl"
+        # building glibc >=2.26
+        EXTRA_ADDONS=""
     fi
 
     touch config.cache

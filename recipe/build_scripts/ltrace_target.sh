@@ -4,6 +4,11 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
+# under construction ... until done disabled for arm
+if [ "${CFG_ARCH}" = "arm" ]; then
+  exit 0
+fi
+
 rm -rf "${WDIR}/build/ltrace-target"
 mkdir -p "${WDIR}/build/ltrace-target"
 pushd "${WDIR}/build/ltrace-target"

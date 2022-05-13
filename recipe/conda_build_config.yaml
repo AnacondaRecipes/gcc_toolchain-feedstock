@@ -6,6 +6,7 @@ cpu_arch:
   - x86_64       # [linux and x86_64]
   - s390x        # [linux and s390x]
   - powerpc64le  # [linux and ppc64le]
+  - aarch64      # [linux and aarch64]
 gcc_version:
   - 11.2.0
 libgfortran_soname:
@@ -17,9 +18,11 @@ _libgcc_mutex:
 duma_version:
    - 2.5.15
 gnu:
-  - 2.17
+  - 2.17          # [not aarch64]
+  - 2.26          # [aarch64]
 conda_glibc_ver:
-  - 2.17
+  - 2.17          # [not aarch64]
+  - 2.26          # [aarch64]
 kernel_version:
   - 3.10.0
 gdb_version:
@@ -28,8 +31,8 @@ gdb_server_version:
    - 11.2
 strace_version:
    - 5.16
-ltrace_version:
-   - 0.7.3
+ltrace_version:    # [not aarch64]
+   - 0.7.3         # [not aarch64]
 openmp_ver:
   - 5.1
 libgomp_ver:

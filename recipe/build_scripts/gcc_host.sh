@@ -115,3 +115,8 @@ ls "${gcc_dir}" | while read f; do
         fi
 done
 
+# require working host "gcc" tool for successful configuration of ncurses, strace, ...
+pushd "gcc_built/bin"
+ln -s ${CFG_TARGET}-gcc gcc
+popd
+

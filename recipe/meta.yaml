@@ -30,9 +30,10 @@ requirements:
     # it leads to direct conflicts ...
     # - {{ compiler('c') }}
     # - {{ compiler('cxx') }}
+    # instead we install this dependency during build
     - llvm-tools  # [osx]
     - make
-    - bash        # [not (ppc64le or s390x)]
+    - bash        # [not (ppc64le or s390x or aarch64)]
     - autoconf 
     - automake
     - libtool
@@ -448,6 +449,37 @@ outputs:
     about:
       summary: The GNU Project Debugger
       home: https://www.gnu.org/software/gdb/
+      license: GPL
+  {% endif %}
+
+  {% if ltrace_version is defined %}
+  - name: ltrace_{{ target_platform }}
+    target: {{ target_platform }}
+    version: {{ ltrace_version }}
+    script: install_scripts/install-ltrace.sh
+    build:
+      number: {{ build_num }}
+      string: {{ build_string }}
+      missing_dso_whitelist:
+        - "*"
+    about:
+      summary: Ltrace is a debugging tool for recording library calls, and signals
+      home: https://alioth.debian.org/projects/ltrace/
+      license: GPL
+  {% endif %}
+
+  {% if strace_version is defined %}
+  - name: strace_{{ target_platform }}
+    target: {{ target_platform }}
+    script: install_scripts/install-strace.sh
+    build:
+      number: {{ build_num }}
+      string: {{ build_string }}
+      missing_dso_whitelist:
+        - "*"
+    about:
+      summary: Strace is a linux diagnostic, and debugging utility with cli
+      home: https://strace.io
       license: GPL
   {% endif %}
 
