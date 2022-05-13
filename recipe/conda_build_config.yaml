@@ -24,7 +24,8 @@ conda_glibc_ver:
   - 2.17          # [not aarch64]
   - 2.26          # [aarch64]
 kernel_version:
-  - 3.10.0
+  - 3.10.0        # [not aarch64]
+  - 4.18.20       # [aarch64]
 gdb_version:
    - 11.2
 gdb_server_version:
