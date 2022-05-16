@@ -7,6 +7,7 @@ cpu_arch:
   - s390x        # [linux and s390x]
   - powerpc64le  # [linux and ppc64le]
   - aarch64      # [linux and aarch64]
+  - dummy        # [not linux]
 gcc_version:
   - 11.2.0
 libgfortran_soname:
