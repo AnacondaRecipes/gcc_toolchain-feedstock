@@ -32,8 +32,9 @@ gdb_server_version:
    - 11.2
 strace_version:
    - 5.16
-ltrace_version:    # [not aarch64]
+ltrace_version:
    - 0.7.3         # [not aarch64]
+   - 0.7.91        # [aarch64]
 openmp_ver:
   - 5.1
 libgomp_ver:

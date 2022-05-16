@@ -4,16 +4,16 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
-# under construction ... until done disabled for arm
-if [ "${CFG_ARCH}" = "arm" ]; then
-  exit 0
-fi
-
 rm -rf "${WDIR}/build/ltrace-target"
 mkdir -p "${WDIR}/build/ltrace-target"
 pushd "${WDIR}/build/ltrace-target"
     cp -r "${WDIR}"/ltrace/* .
 
+    EXTRA_CONFIG=
+    if [ "${CFG_ARCH}" = "arm" ]; then
+        cp $BUILD_PREFIX/share/libtool/build-aux/config.* config/autoconf/.
+        EXTRA_CONFIG="--disable-werror"
+    fi
     # fixes a quirk in makefile, which uses cpu part of triplet
     # to determine subfolder name ...
     pushd "sysdeps/linux-gnu"
@@ -26,6 +26,7 @@ pushd "${WDIR}/build/ltrace-target"
         --build=${HOST}        \
         --host=${CFG_TARGET}   \
         --prefix=/usr          \
+        ${EXTRA_CONFIG}        \
         --with-gnu-ld
 
     echo "Building ltrace ..."
