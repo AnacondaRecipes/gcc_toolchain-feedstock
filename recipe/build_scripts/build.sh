@@ -51,7 +51,7 @@ for tool in ar as dlltool "c++" "c++filt" cpp cc gcc "gcc-ar" "gcc-nm" "gcc-ranl
     [ -z "${where}" ] && where=$(which "${tool}" 2>/dev/null || true)
 
     if [ -n "${where}" ]; then
-        print "let ${HOST-${tool} point to ${where} ...\n"
+        print "let ${HOST}-${tool} point to ${where} ...\n"
         printf "#!/bin/bash\nexec '${where}' \"\${@}\"\n" >"${WDIR}/buildtools/bin/${HOST}-${tool}"
         chmod 700 "${WDIR}/buildtools/bin/${HOST}-${tool}"
     fi
