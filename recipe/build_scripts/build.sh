@@ -58,7 +58,7 @@ for tool in ar as dlltool c++ c++filt cpp cc gcc gcc-ar gcc-nm gcc-ranlib \
 done
 
 for tool in make sed gawk awk libtool; do
-    where=$(which "${tool}" 2>/dev/null || true
+    where=$(which "${tool}" 2>/dev/null || true)
     if [ -n "${where}" ]; then
         printf "#!/bin/bash\nexec '${where}' \"\${@}\"\n" >"${WDIR}/buildtools/bin/${tool}"
         chmod 700 "${WDIR}/buildtools/bin/${tool}"
