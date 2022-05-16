@@ -25,7 +25,8 @@ fi
 
 if [[ "${bootstrapping}" != "yes" ]]; then
   # Use own compilers instead of relying on ones from the docker image/system
-  conda create -p $SRC_DIR/compilers gcc_${target_platform} gxx_${target_platform} binutils --yes --quiet
+  conda create -p $SRC_DIR/compilers gcc_${target_platform} gxx_${target_platform} binutils \
+                                     make gawk sed libtool --yes --quiet
 fi
 
 ${RECIPE_DIR}/build_scripts/build.sh
