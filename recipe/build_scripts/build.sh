@@ -56,6 +56,11 @@ for tool in ar as dlltool c++ c++filt cpp cc gcc gcc-ar gcc-nm gcc-ranlib g++ gc
     fi
 done
 
+# for ncurses sake on powerpc and s390x we create a symlink for gcc
+pushd "${WDIR}/buildtools/bin"
+ln -s "${HOST}-gcc" gcc 
+popd
+
 printf "#!/bin/bash\n$(which makeinfo 2>/dev/null || true) --force \"\${@}\"\ntrue\n" >"${WDIR}/buildtools/bin/makeinfo"
 chmod 700 "${WDIR}/buildtools/bin/makeinfo"
 
