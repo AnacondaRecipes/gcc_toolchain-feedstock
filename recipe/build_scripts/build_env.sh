@@ -63,7 +63,11 @@ esac
 
 if [[ "${bootstrapping}" != "yes" ]]; then
   export PATH=$WDIR/compilers/bin:$PATH
-  HOST="${CFG_TARGET}"
+  if [ "${CFG_ARCH}" = "powerpc" ]; then
+    HOST="powerpc64le-conda_cos7-linux-gnu"
+  else
+    HOST="${CFG_TARGET}"
+  fi
 fi
 
 # we can't use conda's HOST compiler ...
