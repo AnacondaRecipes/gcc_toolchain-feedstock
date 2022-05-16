@@ -59,7 +59,8 @@ printf "#!/bin/bash\n$(which makeinfo 2>/dev/null || true) --force \"\${@}\"\ntr
 chmod 700 "${WDIR}/buildtools/bin/makeinfo"
 
 echo "Checking that we can run gcc --version and being able to compile program ..."
-"${HOST}-gcc" --version
+echo "  ${HOST}-gcc --version ..."
+"${HOST}-gcc" --version || (ls compilers/bin && exit 1)
     
 printf "int main()\n{\n  return 0;\n}\n" >"${WDIR}/build/test.c"
 "${HOST}-gcc" -pipe ${HOST_CFLAG} ${HOST_LDFLAG} "${WDIR}/build/test.c" -o "${WDIR}/build/out"
