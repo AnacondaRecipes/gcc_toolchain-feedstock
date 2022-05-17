@@ -315,6 +315,7 @@ outputs:
         - "*"
       ignore_run_exports:
         - __glibc
+        - _openmp_mutex
     test:
       requires:
         - sysroot_{{ target_platform }}
