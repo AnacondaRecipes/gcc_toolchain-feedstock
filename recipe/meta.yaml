@@ -227,6 +227,7 @@ outputs:
         - "*"
       ignore_run_exports:
         - __glibc
+        - sysroot_{{ target_platform }}
     requirements:
       build:
         # For cpp and crt{i,n}.o
