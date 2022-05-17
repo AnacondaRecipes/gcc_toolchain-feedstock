@@ -113,6 +113,8 @@ outputs:
         - "aarch64-conda-linux-gnu/sysroot/lib64/libpthread-2.26.so"
       ignore_run_exports:
         - __glibc
+        - libgomp
+        - sysroot_{{ target_platform }}
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -175,6 +177,7 @@ outputs:
         - "*"
       ignore_run_exports:
         - __glibc
+        - sysroot_{{ target_platform }}
     requirements:
       host:
         # For cpp and crt{i,n}.o
