@@ -11,7 +11,7 @@ rm -f ${PREFIX}/lib/libgfortran* || true
 
 cp -f --no-dereference ${SRC_DIR}/build/gcc-final/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
 
-patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libgfortran*.so*
+# patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libgfortran*.so*
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/gcc/COPYING.RUNTIME \
