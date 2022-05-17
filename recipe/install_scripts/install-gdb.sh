@@ -7,7 +7,7 @@ CHOST=$(${SRC_DIR}/build/gcc-final/gcc/xgcc -dumpmachine)
 # build-gdb-native could be used (it will have been built
 # with the newer GCC instead of the system one).
 pushd ${SRC_DIR}/build/gdb-cross
-  PATH=${SRC_DIR}/buildtools/bin:$PATH \
+  export PATH=${SRC_DIR}/buildtools/bin:i${SRC_DIR}/compilers/bin:$PATH
   make prefix=${PREFIX} install
   # Gets installed by binutils:
   rm ${PREFIX}/share/info/bfd.info

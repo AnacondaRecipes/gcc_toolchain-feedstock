@@ -4,7 +4,7 @@ CHOST=$(${SRC_DIR}/build/gcc-final/gcc/xgcc -dumpmachine)
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/buildtools/bin:${PATH}
+export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/buildtools/bin:${SRC_DIR}/compilers/bin:${PATH}
 
 mkdir -p ${PREFIX}/lib/
 rm -f ${PREFIX}/lib/libgfortran* || true
