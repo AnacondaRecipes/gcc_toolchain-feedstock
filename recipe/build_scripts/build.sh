@@ -5,8 +5,8 @@ set -e
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
 if [ $(id -u) -eq 0 ]; then
-    echo "You cannot run this script as root"
-    exit 1
+    echo "WARNING: You cannot run this script as root and expecting save results"
+    # exit 1
 fi
 
 n_open_files=$(ulimit -n)
@@ -45,7 +45,9 @@ mkdir -p "${WDIR}/build"
 mkdir -p "${WDIR}/buildtools/bin"
 
 echo "Making build system tools available with poisoned name"
-for tool in ar as dlltool gcc g++ gcj gnatbind gnatmake ld libtool nm objcopy objdump ranlib strip windres; do
+for tool in ar as dlltool c++ c++filt cpp cc gcc gcc-ar gcc-nm gcc-ranlib \
+            g++ gcj gnatbind gnatmake ld libtool nm objcopy objdump ranlib \
+            strip windres; do
     where=$(which "${ORG_HOST}-${tool}" 2>/dev/null || true)
     [ -z "${where}" ] && where=$(which "${tool}" 2>/dev/null || true)
 
@@ -55,11 +57,18 @@ for tool in ar as dlltool gcc g++ gcj gnatbind gnatmake ld libtool nm objcopy ob
     fi
 done
 
+# for ncurses sake on powerpc and s390x we create a symlink for gcc
+pushd "${WDIR}/buildtools/bin"
+ln -s "${HOST}-gcc" gcc
+ln -s "${HOST}-g++" g++ || true
+popd
+
 printf "#!/bin/bash\n$(which makeinfo 2>/dev/null || true) --force \"\${@}\"\ntrue\n" >"${WDIR}/buildtools/bin/makeinfo"
 chmod 700 "${WDIR}/buildtools/bin/makeinfo"
 
 echo "Checking that we can run gcc --version and being able to compile program ..."
-"${HOST}-gcc" --version
+echo "  ${HOST}-gcc --version ..."
+"${HOST}-gcc" --version || (ls compilers/bin && exit 1)
     
 printf "int main()\n{\n  return 0;\n}\n" >"${WDIR}/build/test.c"
 "${HOST}-gcc" -pipe ${HOST_CFLAG} ${HOST_LDFLAG} "${WDIR}/build/test.c" -o "${WDIR}/build/out"

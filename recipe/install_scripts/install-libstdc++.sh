@@ -6,7 +6,7 @@ COMMON_MAKE_OPTS+=(prefix=${PREFIX} exec_prefix=${PREFIX})
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/buildtools/bin:${PATH}
+export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/buildtools/bin:${SRC_DIR}/compilers/bin:${PATH}
 
 pushd ${SRC_DIR}/build/gcc-final/
 
@@ -18,7 +18,7 @@ popd
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib64/* ${PREFIX}/lib
 
-patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libstdc++.so
+# patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libstdc++.so
 
 # no static libs
 find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
