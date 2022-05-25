@@ -30,8 +30,8 @@ requirements:
   build:
     # due a conda-build issue compiler-activation can't be used as
     # it leads to direct conflicts ...
-    # - {{ compiler('c') }}
-    # - {{ compiler('cxx') }}
+    - {{ compiler('c') }}    # [hidden_dep]
+    - {{ compiler('cxx') }}  # [hidden_dep]
     # instead we install this dependency during build
     - llvm-tools  # [osx]
     - make
