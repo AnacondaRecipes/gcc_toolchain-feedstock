@@ -54,7 +54,7 @@ CUR=$PWD/patches
 
 for f in binutils duma gcc gdb glibc "glibc-ports" gmp libelf linux ltrace; do
     echo "Patching $f ..."
-    if [ -d "${WDIR}/${f}" ]; then
+    if [ -d "${CUR}/${f}" ]; then
       pushd "${WDIR}/${f}"
       for g in ${CUR}/${f}/*.patch; do echo "proocess ${g}"; patch -f -p1 -g0 -F1 -i $g; done
       popd
