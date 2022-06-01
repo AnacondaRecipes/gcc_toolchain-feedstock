@@ -4,6 +4,7 @@ set -e
 
 . ${RECIPE_DIR}/build_scripts/build_env.sh
 
+set -ex
 rm -rf "${WDIR}/build/kernel-headers"
 mkdir -p "${WDIR}/build/kernel-headers"
 pushd "${WDIR}/build/kernel-headers"
@@ -21,7 +22,7 @@ pushd "${WDIR}/build/kernel-headers"
         O="${WDIR}/build/kernel-headers"                               \
         ARCH=${kernel_arch}                                            \
         INSTALL_HDR_PATH="${WDIR}/gcc_built/${CFG_TARGET}/sysroot/usr" \
-        V=0                                                            \
+        V=1                                                            \
         headers_install
 
     echo "Checking installed headers"
