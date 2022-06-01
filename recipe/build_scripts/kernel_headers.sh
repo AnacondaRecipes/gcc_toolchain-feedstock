@@ -14,6 +14,7 @@ pushd "${WDIR}/build/kernel-headers"
         *) kernel_arch="${CFG_ARCH}";;
     esac
 
+    export CFLAGS="${CFLAGS} -fcommon"
     echo "Installing kernel headers"
     make -C "${WDIR}/linux"                                            \
         BASH="$(which bash)"                                           \
