@@ -13,7 +13,7 @@ gcc_version:
 libgfortran_soname:
   - 5
 gcc_version_build_number:
-  - 0
+  - 1
 _libgcc_mutex:
   - 0.1 main
 duma_version:

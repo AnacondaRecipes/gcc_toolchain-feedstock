@@ -19,6 +19,7 @@ build:
   # defined in conda_build_config.yaml so that we can keep it associated
   # with a particular GCC version number
   number: {{ build_num | default(0) }}
+  # trigger: 0
   string: {{ build_string }}
   skip: True  # [not linux]
   # The CentOS7 system libraries should be used for everything here.
@@ -30,8 +31,8 @@ requirements:
   build:
     # due a conda-build issue compiler-activation can't be used as
     # it leads to direct conflicts ...
-    # - {{ compiler('c') }}
-    # - {{ compiler('cxx') }}
+    - {{ compiler('c') }}    # [hidden_dep]
+    - {{ compiler('cxx') }}  # [hidden_dep]
     # instead we install this dependency during build
     - llvm-tools  # [osx]
     - make

@@ -52,11 +52,13 @@ ln -s §{WDIR}/glibc-ports ${WDIR}/glibc/ports
 
 CUR=$PWD/patches
 
-for f in binutils duma gcc gdb glibc "glibc-ports" gmp libelf ltrace; do
+for f in binutils duma gcc gdb glibc "glibc-ports" gmp libelf linux ltrace; do
     echo "Patching $f ..."
-    pushd "${WDIR}/${f}"
-    for g in ${CUR}/${f}/*.patch; do echo "proocess ${g}"; patch -f -p1 -g0 -F1 -i $g; done
-    popd
+    if [ -d "${CUR}/${f}" ]; then
+      pushd "${WDIR}/${f}"
+      for g in ${CUR}/${f}/*.patch; do echo "proocess ${g}"; patch -f -p1 -g0 -F1 -i $g; done
+      popd
+    fi
 done
 
 case "${HOST}" in
